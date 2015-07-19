@@ -9,7 +9,6 @@ RSpec.describe Board do
   end
 
   it 'can exist' do
-  #  expect(Board.new(starting_board, 1))
     expect(@board)
   end
 
@@ -20,7 +19,6 @@ RSpec.describe Board do
   end
 
   it 'contains the correct number of cells' do
-
     expect(@board.size).to eq(9)
   end
 
@@ -29,10 +27,6 @@ RSpec.describe Board do
 
       are_all_cells = @board.all? { |cell| cell.is_a? Cell }
       expect(are_all_cells).to be true
-    end
-
-    it 'that form a grid' do
-      expect(@board[0].coords).to eq([0, 0])
     end
   end
 end

@@ -1,6 +1,7 @@
 require './starting_board'
 require 'cell'
 require 'board'
+require './lib/fate'
 
 require 'pry'
 
@@ -18,7 +19,6 @@ RSpec.describe Cell do
 
     expect(cell.x).to be(2)
     expect(cell.y).to be(3)
-    #expect(cell.neighbors).to eq([])
     expect(cell.current_state).to eq(1)
     expect(cell.size).to eq(1)
     expect(cell.future_state).to eq(0)
@@ -46,5 +46,43 @@ RSpec.describe Cell do
 
   it 'can find out how many living neighbors it has' do
     expect(@board[4].living_neighbors).to eq(2)
+  end
+
+  it 'dies if it has less than 2 neighbors' do
+    cell = @board[1]
+
+    expect(cell.living_neighbors).to eq(1)
+    expect(cell.current_state).to eq(1)
+    decide_fate(cell)
+
+    expect(cell.future_state).to eq(0)
+
+    cell = @board[7]
+
+    expect(cell.living_neighbors).to eq(1)
+    expect(cell.current_state).to eq(1)
+    decide_fate(cell)
+
+    expect(cell.future_state).to eq(0)
+  end
+
+  it 'lives if it has 2 or 3 neighbors' do
+    cell = @board[4]
+
+    expect(cell.living_neighbors).to eq(2)
+    expect(cell.current_state).to eq(1)
+    decide_fate(cell)
+
+    expect(cell.future_state).to eq(1)
+  end
+
+  it 'it comes alive with exactly  3 neighbors' do
+    cell = @board[3]
+
+    expect(cell.living_neighbors).to eq(3)
+    expect(cell.current_state).to eq(0)
+    decide_fate(cell)
+
+    expect(cell.future_state).to eq(1)
   end
 end

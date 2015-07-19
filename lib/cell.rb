@@ -3,28 +3,32 @@ require_relative 'board'
 class Cell
   include Enumerable
   attr_accessor :x, :y, :current_state,
-    :future_state, :size, :neighbors
+    :future_state
 
   def initialize(values)
     @x             = values[:x]
     @y             = values[:y]
     @current_state = values[:current_state]
-    @size          = values[:cell_size]
-    @board_width   = values[:width]
     @future_state  = 0
-    @neighbors     = []
   end
 
   def each(&block)
     self.each(&block)
   end
 
+  def size
+    Board.cell_size
+  end
   def out_of_bounds(x, y)
-    (x < 0 || x == @board_width) || (y < 0 || y == @board_width)
+    (x < 0 || x == Board.width) || (y < 0 || y == Board.width)
   end
 
-  def coords
-    [x, y]
+  # def coords
+  #   [x, y]
+  # end
+
+  def alive?(cell)
+    cell.current_state == 1
   end
 
   def neighbor_coords
@@ -41,7 +45,6 @@ class Cell
   end
 
   def neighbors
-    #self.neighbors = neighbor_coords.map { |neighbor| board.get_cell(x, y) }
      neighbor_coords.map { |x, y| Board.get_cell(x, y) }
   end
 
