@@ -3,23 +3,24 @@ require 'cell'
 require 'board'
 require './starting_board'
 
+
 RSpec.describe Board do
   before do
-    @board = Board.generate_cells(starting_board, 1)
+    @board = Board.generate_cells(test_board)
   end
 
   it 'can exist' do
     expect(@board)
+    expect(@cells)
   end
 
   it 'is given a starting_board, cell_size defaults to 1' do
     expect(Board.width).to eq(3)
-    expect(Board.height).to eq(3)
-    expect(Board.cell_size).to eq(1)
+    expect(Board.height).to eq(5)
   end
 
   it 'contains the correct number of cells' do
-    expect(@board.size).to eq(9)
+     expect(@board.size).to eq(15)
   end
 
   context 'contains objects' do

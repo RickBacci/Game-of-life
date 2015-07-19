@@ -29,7 +29,7 @@ def decide_fate(cell)
     puts "alive_but_starving ---#{[cell.y, cell.x]}---------------- i have #{cell.living_neighbors} neighbors ---"
     cell.future_state = 0
   elsif born_again(cell)
-    puts "born_again -----------#{[cell.y, cell.x]}---------------- i have #{cell.living_neighbors} neighbors ---"
+   puts "born_again -----------#{[cell.y, cell.x]}---------------- i have #{cell.living_neighbors} neighbors ---"
     cell.future_state = 1
   elsif staying_dead(cell)
     puts "still_dead -----------#{[cell.y, cell.x]}---------------- i have #{cell.living_neighbors} neighbors ---"
@@ -46,9 +46,9 @@ end
 def change_colors(cell)
   if cell.alive?(cell)
     fill 256, 0, 0
-    rect cell.x * 50, cell.y * 50, cell.size, cell.size
+    rect cell.x * 5, cell.y * 5, 5, 5
   else
     fill 0, 0, 0
-    rect cell.x * 50, cell.y * 50, cell.size, cell.size
+    rect cell.x * 5, cell.y * 5, 5, 5
   end
 end

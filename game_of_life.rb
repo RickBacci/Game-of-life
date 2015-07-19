@@ -4,13 +4,11 @@ require './lib/cell'
 require './lib/fate'
 
 def setup
-  @board       = Board.generate_cells(starting_board, 800, 600, 1)
-  cell_size    = Board.cell_size
-  array_width  = Board.width
-  width        = cell_size * array_width
-  height       = cell_size * array_width
+  @board = Board.generate_cells(starting_board)
   frame_rate 2
   smooth
+  width = 800
+  height = 600
   size width, height
 end
 

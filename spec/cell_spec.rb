@@ -7,32 +7,31 @@ require 'pry'
 
 RSpec.describe Cell do
   before do
-    @board = Board.generate_cells(starting_board)
+    @board = Board.generate_cells(test_board)
   end
 
-  it 'can exist' do
-    expect(Cell.new(x: 1, y: 1, current_state: 1, cell_size: 1))
+ it 'can exist' do
+    expect(Cell.new(x: 1, y: 1, current_state: 1))
   end
 
   it 'has default values' do
-    cell = Cell.new(x: 2, y: 3, current_state: 1, cell_size: 1)
+    cell = Cell.new(x: 2, y: 3, current_state: 1)
 
     expect(cell.x).to be(2)
     expect(cell.y).to be(3)
     expect(cell.current_state).to eq(1)
-    expect(cell.size).to eq(1)
     expect(cell.future_state).to eq(0)
   end
 
   it 'has 8 neighbors' do
-    cell = @board[4]
+    cell = @board[7]
 
-    expect(cell.neighbor_coords.size).to eq 8
+    expect(cell.neighbor_coords.length).to eq 8
   end
 
   it 'has less than 8 neighbors if neighbors are out of bounds' do
 
-    expect(@board[0].neighbor_coords.size).to eq 3
+    expect(@board[0].neighbor_coords.length).to eq 3
   end
 
 
@@ -41,15 +40,15 @@ RSpec.describe Cell do
   end
 
   it 'can find all neighbors' do
-    expect(@board[4].neighbors.size).to eq(8)
+    expect(@board[7].neighbors.length).to eq(8)
   end
 
   it 'can find out how many living neighbors it has' do
-    expect(@board[4].living_neighbors).to eq(2)
+    expect(@board[7].living_neighbors).to eq(2)
   end
 
   it 'dies if it has less than 2 neighbors' do
-    cell = @board[1]
+    cell = @board[4]
 
     expect(cell.living_neighbors).to eq(1)
     expect(cell.current_state).to eq(1)
@@ -57,7 +56,7 @@ RSpec.describe Cell do
 
     expect(cell.future_state).to eq(0)
 
-    cell = @board[7]
+    cell = @board[10]
 
     expect(cell.living_neighbors).to eq(1)
     expect(cell.current_state).to eq(1)
@@ -67,7 +66,7 @@ RSpec.describe Cell do
   end
 
   it 'lives if it has 2 or 3 neighbors' do
-    cell = @board[4]
+    cell = @board[7]
 
     expect(cell.living_neighbors).to eq(2)
     expect(cell.current_state).to eq(1)
@@ -77,7 +76,7 @@ RSpec.describe Cell do
   end
 
   it 'it comes alive with exactly  3 neighbors' do
-    cell = @board[3]
+    cell = @board[6]
 
     expect(cell.living_neighbors).to eq(3)
     expect(cell.current_state).to eq(0)

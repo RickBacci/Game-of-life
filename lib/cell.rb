@@ -15,11 +15,8 @@ class Cell
     self.each(&block)
   end
 
-  def size
-    Board.cell_size
-  end
   def out_of_bounds(x, y)
-    (x < 0 || x == Board.width) || (y < 0 || y == Board.width)
+    (x < 0 || x == starting_board[0].size) || (y < 0 || y == starting_board[0].size)
   end
 
   def alive?(cell)

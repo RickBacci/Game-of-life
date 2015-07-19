@@ -2,50 +2,35 @@ require 'pry'
 require_relative 'cell'
 
 class Board
-  include Enumerable
 
-  attr_accessor :board_height, :board_width, :cell_size,
-                :starting_board, :total_columns
+  include Enumerable
+  attr_accessor :starting_board
 
   def each(&block)
     @cells.each(&block)
   end
 
-  def self.cells
-    @cells
+  def self.width
+    @cells.select { |cell| cell.y == 0 }.size
   end
 
-  def self.cell_size
-    @cell_size
+  def self.height
+    @cells.select { |cell| cell.x == 0 }.size
   end
 
-  def self.board_width
-    starting_board.size
-  end
-
-  def self.board_height
-    starting_board.count
-  end
-
-  def self.generate_cells(starting_board, board_width, board_height, cell_size=1)
-   # @width = width
-   # @height = height
-   # @cell_size = cell_size
+  def self.generate_cells(starting_board)
     @cells = []
     starting_board.each_with_index do |row, y|
       row.each_with_index do |cell, x|
-        cells << Cell.new(x: x, y: y,
-                          current_state: cell,
-                          cell_size: cell_size,
-                          board_width: board_width,
-                          board_height: board_height)
+        @cells << Cell.new(x: x, y: y, current_state: cell)
       end
     end
-    cells
+    @cells
   end
 
   def self.get_cell(x, y)
-    cells.detect { |cell| cell.x == x && cell.y == y }
+    @cells.detect { |cell| cell.x == x && cell.y == y }
   end
+
 end
 
