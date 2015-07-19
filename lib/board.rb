@@ -4,7 +4,7 @@ require_relative 'cell'
 class Board
   include Enumerable
 
-  attr_accessor :height, :width, :cell_size,
+  attr_accessor :board_height, :board_width, :cell_size,
                 :starting_board, :total_columns
 
   def each(&block)
@@ -19,23 +19,26 @@ class Board
     @cell_size
   end
 
-  def self.width
+  def self.board_width
     starting_board.size
   end
 
-  def self.height
+  def self.board_height
     starting_board.count
   end
 
-  def self.generate_cells(starting_board, cell_size=1)
-    @cell_size = cell_size
+  def self.generate_cells(starting_board, board_width, board_height, cell_size=1)
+   # @width = width
+   # @height = height
+   # @cell_size = cell_size
     @cells = []
     starting_board.each_with_index do |row, y|
       row.each_with_index do |cell, x|
         cells << Cell.new(x: x, y: y,
                           current_state: cell,
                           cell_size: cell_size,
-                          width: width)
+                          board_width: board_width,
+                          board_height: board_height)
       end
     end
     cells

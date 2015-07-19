@@ -4,7 +4,7 @@ require './lib/cell'
 require './lib/fate'
 
 def setup
-  @board       = Board.generate_cells(starting_board, 50)
+  @board       = Board.generate_cells(starting_board, 800, 600, 1)
   cell_size    = Board.cell_size
   array_width  = Board.width
   width        = cell_size * array_width

@@ -2,8 +2,7 @@ require_relative 'board'
 
 class Cell
   include Enumerable
-  attr_accessor :x, :y, :current_state,
-    :future_state
+  attr_accessor :x, :y, :current_state, :future_state
 
   def initialize(values)
     @x             = values[:x]
@@ -22,10 +21,6 @@ class Cell
   def out_of_bounds(x, y)
     (x < 0 || x == Board.width) || (y < 0 || y == Board.width)
   end
-
-  # def coords
-  #   [x, y]
-  # end
 
   def alive?(cell)
     cell.current_state == 1
