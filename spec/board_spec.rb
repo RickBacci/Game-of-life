@@ -23,6 +23,19 @@ RSpec.describe Board do
      expect(@board.size).to eq(15)
   end
 
+  it 'can be rectangular' do
+    expect(@board.select { |cell| cell.y == 0 }.size).to eq(3)
+    expect(@board.select { |cell| cell.x == 0 }.size).to eq(5)
+  end
+
+  it 'can add a neighbor cell' do
+    cell = @board[0]
+    expect cell.neighbors.size == 8
+
+    coords = cell.neighbors.size
+    expect(cell.living_neighbors).to_not be_nil
+  end
+
   context 'contains objects' do
     it 'that are Cells' do
 

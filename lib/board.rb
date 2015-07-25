@@ -4,10 +4,14 @@ require_relative 'cell'
 class Board
 
   include Enumerable
-  attr_accessor :starting_board
+  attr_accessor :starting_board, :cells
 
   def each(&block)
     @cells.each(&block)
+  end
+
+  def self.cells
+    @cells
   end
 
   def self.width
@@ -32,5 +36,8 @@ class Board
     @cells.detect { |cell| cell.x == x && cell.y == y }
   end
 
+  # def self.add_cell(cell)
+  #   @cells << cell
+  # end
 end
 

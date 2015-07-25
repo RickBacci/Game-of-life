@@ -43,12 +43,9 @@ def tick_tock
   end
 end
 
-def change_colors(cell)
+def display_living_cells(cell)
   if cell.alive?(cell)
     fill 256, 0, 0
-    rect cell.x * 5, cell.y * 5, 5, 5
-  else
-    fill 0, 0, 0
     rect cell.x * 5, cell.y * 5, 5, 5
   end
 end
